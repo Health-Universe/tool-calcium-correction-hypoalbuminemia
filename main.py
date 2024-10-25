@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
 
 app = FastAPI(
-    title="Corrected Ca2 - Hypoalbuminemia Tool",
+    title="Corrected Ca - Hypoalbuminemia Tool",
     description="API for calculating corrected calcium levels in patients with hypoalbuminemia. Allows customization of the normal albumin value.",
     version="1.0.0",
 )
