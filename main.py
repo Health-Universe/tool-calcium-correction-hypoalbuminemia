@@ -3,7 +3,7 @@ from typing import Annotated
 
 from fastapi import FastAPI, Form
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field
 
 app = FastAPI(
     title="Corrected Ca - Hypoalbuminemia Tool",
@@ -45,21 +45,6 @@ class CalciumCorrectionInput(BaseModel):
         examples=[4.0],
         description="Enter the normal albumin level in g/dL used for correction. Default is 4.0 g/dL.",
     )
-
-
-    @field_validator('serum_albumin')
-    @classmethod
-    def albumin_within_range(cls, v: float) -> float:
-        if not (2.0 <= v <= 5.5):
-            raise ValueError('Serum Albumin must be between 2.0 and 5.5 g/dL.')
-        return v
-
-    @field_validator('normal_albumin')
-    @classmethod
-    def normal_albumin_within_range(cls, v: float) -> float:
-        if not (3.0 <= v <= 5.0):
-            raise ValueError('Normal Albumin must be between 3.0 and 5.0 g/dL.')
-        return v
 
 
 class CalciumCorrectionOutput(BaseModel):
